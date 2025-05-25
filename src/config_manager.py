@@ -69,3 +69,42 @@ def get_or_prompt_serato_path():
 		else:
 			print("[red]That folder doesn't contain a valid Serato Subcrates folder. Please try again.[/red]")
 
+def is_valid_rekordbox_folder(path):
+	expected_db_path = os.path.join(path, "rekordbox", "master.db")
+	return os.path.isfile(expected_db_path)
+
+def get_or_prompt_rekordbox_db_path():
+	config = load_config()
+	saved_path = config.get("rekordboxDbPath", "")
+	if os.path.isfile(saved_path):
+		return saved_path
+
+	# OS-specific default Rekordbox location
+	default_start_dir = ""
+	if os.name == "nt":  # Windows
+		default_start_dir = str(Path.home() / "AppData" / "Roaming" / "Pioneer")
+	else:  # macOS/Linux
+		default_start_dir = str(Path.home() / "Library" / "Pioneer")
+
+	print("No Rekordbox database path found. Please select the parent Pioneer folder.")
+	root = tk.Tk()
+	root.withdraw()
+
+	while True:
+		selected_path = filedialog.askdirectory(
+			title="Select your Pioneer folder (contains rekordbox/master.db)",
+			initialdir=default_start_dir
+		)
+
+		if not selected_path:
+			print("[ERROR] No folder selected. Exiting.")
+			exit(1)
+
+		if is_valid_rekordbox_folder(selected_path):
+			db_path = os.path.join(selected_path, "rekordbox", "master.db")
+			config["rekordboxDbPath"] = db_path
+			save_config(config)
+			print(f"[INFO] Saved Rekordbox DB path: {db_path}")
+			return db_path
+		else:
+			print("[red]That folder does not contain rekordbox/master.db. Please try again.[/red]")
