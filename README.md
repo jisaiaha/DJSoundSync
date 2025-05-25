@@ -1,6 +1,6 @@
-# CrateSync
+# DJ Sound Sync
 
-CrateSync is a command-line tool (with a planned GUI) for synchronizing DJ libraries between **Serato DJ** and **Rekordbox**. It ensures that your **track lists, cue points, and especially playlists/crates** are consistent across both platforms — so your set prep isn't locked into one software.
+**DJ Sound Sync** is a command-line tool (with a planned GUI) for synchronizing DJ libraries between **Serato DJ** and **Rekordbox**. It ensures that your **crates/playlists, track lists, and cue points** are consistent across both platforms — so your set prep is never stuck in one software.
 
 ---
 
@@ -8,9 +8,9 @@ CrateSync is a command-line tool (with a planned GUI) for synchronizing DJ libra
 
 - Sync **crates/playlists** between Serato and Rekordbox
 - Detect and add missing tracks between libraries
-- Sync **cue points** and later loops
+- Sync **cue points**
 - Allow one-way or two-way sync
-- Prepare for GUI functionality later
+- Expand to a GUI interface after a working CLI is complete
 
 ---
 
@@ -32,8 +32,8 @@ CrateSync is a command-line tool (with a planned GUI) for synchronizing DJ libra
 - Python 3
 - `mutagen` – read/write audio metadata
 - `sqlite3` – access Rekordbox database
-- `rich` – formatted CLI output (optional)
-- Future: GUI using `tkinter`, `PyQT`, or `Electron`
+- `rich` – optional formatted CLI output
+- Future: GUI using `tkinter`, `PyQT`, or Electron
 
 ---
 
@@ -56,7 +56,7 @@ CrateSync is a command-line tool (with a planned GUI) for synchronizing DJ libra
 ## 🧠 Future Ideas
 
 - Conflict resolution for playlist/cue changes
-- Color-coded cue point support
+- Cue point colors and loop support
 - Smart crate mapping (e.g., genre folders)
 - Backup/export before sync
 - Cross-platform support (Windows/macOS/Linux)
@@ -73,7 +73,7 @@ CrateSync is a command-line tool (with a planned GUI) for synchronizing DJ libra
 
 ## 🧪 Status
 
-**🚧 CLI in development. Crate and cue point sync are top priorities. GUI coming late summer.**
+**🚧 CLI in development. Crate and cue point sync are top priorities. GUI planned for late summer.**
 
 ---
 
