@@ -108,3 +108,36 @@ def get_or_prompt_rekordbox_db_path():
 			return db_path
 		else:
 			print("[red]That folder does not contain rekordbox/master.db. Please try again.[/red]")
+
+def is_valid_rekordbox_xml(path):
+	# Check file exists and ends in .xml
+	return os.path.isfile(path) and path.lower().endswith(".xml")
+
+def get_or_prompt_rekordbox_xml_path():
+	config = load_config()
+	saved_path = config.get("rekordboxXmlPath", "")
+	if is_valid_rekordbox_xml(saved_path):
+		return saved_path
+
+	print("No Rekordbox XML path found. Please select your Rekordbox export XML file.")
+	root = tk.Tk()
+	root.withdraw()
+
+	while True:
+		selected_file = filedialog.askopenfilename(
+			title="Select Rekordbox XML Export File",
+			filetypes=[("XML Files", "*.xml")],
+			initialdir=str(Path.home())
+		)
+
+		if not selected_file:
+			print("[ERROR] No file selected. Exiting.")
+			exit(1)
+
+		if is_valid_rekordbox_xml(selected_file):
+			config["rekordboxXmlPath"] = selected_file
+			save_config(config)
+			print(f"[INFO] Saved Rekordbox XML path: {selected_file}")
+			return selected_file
+		else:
+			print("[red]That file is not a valid XML file. Please try again.[/red]")
